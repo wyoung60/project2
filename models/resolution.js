@@ -6,6 +6,7 @@ const sequelize = require("../config/connection");
 //Resolution model for DB
 const Resolution = sequelize.define("resolution", {
   title: Sequelize.STRING,
+  //Add the remaining parameters
 });
 
 Resolution.sync();
