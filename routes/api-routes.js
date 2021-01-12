@@ -17,6 +17,8 @@ module.exports = (app) => {
   });
   //Post route needed
   app.post("/api/resolution", (req, res) => {
-    Resolution.create({}).then((results) => res.json(results));
+    Resolution.create({ title: req.body.title }).then((results) =>
+      res.json(results)
+    );
   });
 };
