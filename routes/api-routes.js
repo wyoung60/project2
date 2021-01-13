@@ -4,10 +4,12 @@ const Resolution = require("../models/resolution");
 
 //Routes
 module.exports = (app) => {
+  //Opening route
   app.get("/", (req, res) => {
     res.render("index");
   });
 
+  //Route to add new resolution
   app.get("/new", (req, res) => {
     Resolution.findAll({}).then((results) => {
       const resolutionArray = [];
@@ -21,6 +23,7 @@ module.exports = (app) => {
     });
   });
 
+  //Route to post new resolution
   app.post("/api/resolution", (req, res) => {
     Resolution.create({ title: req.body.title }).then((results) =>
       res.json(results)
