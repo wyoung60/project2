@@ -1,15 +1,20 @@
 //Front end JS here
+//Waits for document to be loaded
 document.addEventListener("DOMContentLoaded", (e) => {
   if (e) {
     console.info("DOM loaded");
   }
+  //Traversing the DOM variables
   const submitButton = document.querySelector("#submitButton");
   const resolutionTextArea = document.querySelector("#resolution");
 
+  //If statement to prevent error when not present
   if (submitButton) {
+    //Event listener
     submitButton.addEventListener("click", () => {
+      //Gets data from text area
       let resolutionValue = { title: resolutionTextArea.value };
-      console.log(resolutionValue);
+      //Calls post from api-routes
       fetch("/api/resolution", {
         method: "POST",
         headers: {
@@ -18,7 +23,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         },
         body: JSON.stringify(resolutionValue),
       }).then((response) => {
-        console.log(response);
+        //Reloads page
         location.reload();
       });
     });
