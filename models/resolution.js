@@ -1,14 +1,21 @@
 //Dependencies
-const Sequelize = require("sequelize");
-//Connection to DB
-const sequelize = require("../config/connection");
+// const Sequelize = require("sequelize");
+// //Connection to DB
+// const sequelize = require("../config/connection");
 
-//Resolution model for DB
-const Resolution = sequelize.define("resolution", {
-  title: Sequelize.STRING,
-  //Add the remaining parameters
-});
+// const sequelize = require("../config/connection");
 
-Resolution.sync();
+// Resolution model for DB
+// const Resolution = sequelize.define("resolution", {
+//   title: Sequelize.STRING,
+//   //Add the remaining parameters
+// });
 
-module.exports = Resolution;
+// Resolution.sync();
+
+module.exports = (sequelize, DataTypes) => {
+  const Resolution = sequelize.define("resolution", {
+    title: DataTypes.STRING,
+  });
+  return Resolution;
+};
