@@ -1,7 +1,11 @@
 {
   "development": {
     "username": "root",
+<<<<<<< HEAD
     "password": "NewOrleans1!",
+=======
+    "password": "!",
+>>>>>>> 3c62d27cbdaeed0d0b7390060dd0dfd08ad854a5
     "database": "resolution_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
