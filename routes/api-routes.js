@@ -23,6 +23,10 @@ module.exports = (app) => {
     });
   });
 
+  app.get("/login", (req, res) => {
+    res.render("login");
+  });
+
   //Route to post new resolution
   app.post("/api/resolution", (req, res) => {
     db.resolution
