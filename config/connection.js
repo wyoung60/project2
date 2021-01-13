@@ -1,17 +1,17 @@
-//Dependencies
-const Sequelize = require("sequelize");
+// //Dependencies
+// const Sequelize = require("sequelize");
 
-//Connection to mySQL
-const sequelize = new Sequelize("resolution_db", "root", "NewOrleans1!", {
-  host: "localhost",
-  port: 3306,
-  dialect: "mysql",
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 10000,
-  },
-});
+// //Connection to mySQL
+// const sequelize = new Sequelize("resolution_db", "root", "41418Mowgs!", {
+//   host: "localhost",
+//   port: 3306,
+//   dialect: "mysql",
+//   pool: {
+//     max: 5,
+//     min: 0,
+//     idle: 10000,
+//   },
+// });
 
-//Export connection
-module.exports = sequelize;
+// //Export connection
+// module.exports = sequelize;

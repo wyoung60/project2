@@ -1,6 +1,9 @@
 //Dependencies
 const express = require("express");
 const exphbs = require("express-handlebars");
+const session = require("express-session");
+const passport = require("passport");
+const db = require("./models");
 
 //Instance of express
 const app = express();
@@ -16,8 +19,16 @@ app.use(express.json());
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+app.use(
+  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
 //Get routes
 require(".//routes/api-routes")(app);
 
 //Start server
-app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
+db.sequelize.sync().then(() => {
+  app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
+});
