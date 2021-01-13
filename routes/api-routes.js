@@ -11,6 +11,19 @@ module.exports = (app) => {
 
   //Route to add new resolution
   app.get("/new", (req, res) => {
+    // db.resolution.findAll({}).then((results) => {
+    //   const resolutionArray = [];
+    //   results.forEach((element) => {
+    //     resolutionArray.push(element.dataValues);
+    //   });
+    //   const hbsObject = {
+    //     resolution: resolutionArray,
+    //   };
+    res.render("newResolution" /*hbsObject*/);
+    // });
+  });
+
+  app.get("/view", (req, res) => {
     db.resolution.findAll({}).then((results) => {
       const resolutionArray = [];
       results.forEach((element) => {
@@ -19,7 +32,7 @@ module.exports = (app) => {
       const hbsObject = {
         resolution: resolutionArray,
       };
-      res.render("newResolution", hbsObject);
+      res.render("viewAll", hbsObject);
     });
   });
 
