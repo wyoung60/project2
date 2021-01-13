@@ -2,7 +2,8 @@
 
 
 {{#each resolution}}
-<div id="selectedResolution">
-    <p>{{title}}</p>
+<div value={{id}}>
+    <h3 id="selectedResolution">{{title}}</h3>
+    {{> milestones/milestones-block }}
 </div>
 {{/each}}

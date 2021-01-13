@@ -8,17 +8,41 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const submitButton = document.querySelector("#submitButton");
   const resolutionTextArea = document.querySelector("#resolution");
   const selectedResolution = document.querySelectorAll("#selectedResolution");
-  const milestones = document.createElement("p");
+  const milestones = document.createElement("button");
+  const milestoneInput = document.createElement("textarea");
+  const newGoal = { goal: "", resolution: "" };
 
   if (selectedResolution) {
     selectedResolution.forEach((item) => {
       item.addEventListener("click", () => {
-        console.log(item);
-        // const goalDiv = item.childElement;
-        // console.log(goalDiv);
-        milestones.textContent = "Hi";
-        item.appendChild(milestones);
+        milestoneInput.value = "";
+        let parentDiv = item.parentElement;
+        milestones.textContent = "Add Milestone";
+        parentDiv.appendChild(milestoneInput);
+        parentDiv.appendChild(milestones);
+        newGoal.resolution = parentDiv.getAttribute("value");
       });
+    });
+  }
+
+  if (milestones) {
+    milestones.addEventListener("click", () => {
+      if (!milestoneInput.value) {
+        return;
+      }
+      newGoal.goal = milestoneInput.value;
+      console.log(newGoal);
+      // fetch("/api/resolution", {
+      //   method: "POST",
+      //   headers: {
+      //     Accept: "application/json",
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(resolutionValue),
+      // }).then((response) => {
+      //   //Reloads page
+      //   location.reload();
+      // });
     });
   }
 
