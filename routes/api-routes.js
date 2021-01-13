@@ -40,6 +40,10 @@ module.exports = (app) => {
     res.render("login");
   });
 
+  app.get("/signup", (req, res) => {
+    res.render("signup");
+  });
+
   //Route to post new resolution
   app.post("/api/resolution", (req, res) => {
     db.resolution
