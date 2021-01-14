@@ -3,28 +3,31 @@ const db = require("../models");
 const passport = require("../config/passport");
 const resolution = require("../models/resolution");
 const e = require("express");
+const isAuthenticated = require('../config/middleware/isAuthenticated')
+
 
 //Routes
 module.exports = (app) => {
   //Opening route
   app.get("/", (req, res) => {
-    res.render("index");
+    console.log(req.user)
+    res.render("index", { user: req.user });
   });
 
   //Route to add new resolution
-  app.get("/mind", (req, res) => {
+  app.get("/mind", isAuthenticated, (req, res) => {
     res.render("newResolutionMind");
   });
 
-  app.get("/body", (req, res) => {
+  app.get("/body", isAuthenticated, (req, res) => {
     res.render("newResolutionBody");
   });
 
-  app.get("/knowledge", (req, res) => {
+  app.get("/knowledge", isAuthenticated, (req, res) => {
     res.render("newResolutionKnowledge");
   });
 
-  app.get("/view", (req, res) => {
+  app.get("/view", isAuthenticated, (req, res) => {
     const resolutionArray = [];
     db.resolution.findAll({}).then((results) => {
       results.forEach((element) => {
@@ -56,8 +59,26 @@ module.exports = (app) => {
     res.render("login");
   });
 
+  app.post("/login", passport.authenticate("local"), (req, res) => {
+    res.redirect("/");
+    
+  });
+
   app.get("/signup", (req, res) => {
     res.render("signup");
+  });
+
+  app.post("/signup", (req, res) => {
+    db.User.create({
+      email: req.body.email,
+      password: req.body.password,
+    })
+      .then(() => {
+        res.redirect("/login");
+      })
+      .catch((err) => {
+        res.render("signup", { error: "Unable to sign up, try again" });
+      });
   });
 
   //Route to post new resolution
@@ -82,6 +103,7 @@ module.exports = (app) => {
   });
 
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
+    req.session.email = req.user.email
     res.json(req.user);
   });
 

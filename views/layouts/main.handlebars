@@ -18,10 +18,11 @@
                 <li>
                     <a class="btn waves-effect waves-light orange darken-4 purple-text darken-2" href="/view">About</a>
                 </li>
-                <li>
-                    <a class="btn waves-effect waves-light orange darken-4 purple-text darken-2"
-                        href="/login">Login/Sign Up</a>
-                </li>
+                {{#if user}}
+                <li><a class="btn waves-effect waves-light orange darken-4 purple-text darken-2" href="/logout">Logout</a></li>
+                {{else}}
+                <li><a class="btn waves-effect waves-light orange darken-4 purple-text darken-2" href="/login">Login/Sign Up</a></li>
+                {{/if}}
                 <li>
                     <a class="btn waves-effect waves-light orange darken-4 purple-text darken-2"
                         href="/contact">Contact</a>
