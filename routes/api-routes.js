@@ -12,8 +12,16 @@ module.exports = (app) => {
   });
 
   //Route to add new resolution
-  app.get("/new", (req, res) => {
-    res.render("newResolution");
+  app.get("/mind", (req, res) => {
+    res.render("newResolutionMind");
+  });
+
+  app.get("/body", (req, res) => {
+    res.render("newResolutionBody");
+  });
+
+  app.get("/knowledge", (req, res) => {
+    res.render("newResolutionKnowledge");
   });
 
   app.get("/view", (req, res) => {
@@ -55,7 +63,12 @@ module.exports = (app) => {
   //Route to post new resolution
   app.post("/api/resolution", (req, res) => {
     db.resolution
-      .create({ title: req.body.title })
+      .create({
+        title: req.body.title,
+        mind: req.body.mind,
+        body: req.body.body,
+        knowledge: req.body.knowledge,
+      })
       .then((results) => res.json(results));
   });
 

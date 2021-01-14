@@ -1,18 +1,37 @@
-<h1>Resolutions</h1>
+<h1 class="center-align">Resolutions</h1>
 
-
-{{!-- {{#each resolution}}
-<div value={{id}}>
-    <h3 id="selectedResolution">{{title}}</h3>
-
-</div>
-{{/each}} --}}
-
+<h3 class="center-align">Mind</h3>
 <div class="container">
     <div class="collection">
         {{#each resolution}}
+        {{#if mind}}
         <a id="selectedResolution" value={{id}} class="collection-item purple white-text">{{title}}</a>
         {{> milestones/milestones-block }}
+        {{/if}}
+        {{/each}}
+    </div>
+</div>
+
+<h3 class="center-align">Body</h3>
+<div class="container">
+    <div class="collection">
+        {{#each resolution}}
+        {{#if body}}
+        <a id="selectedResolution" value={{id}} class="collection-item purple white-text">{{title}}</a>
+        {{> milestones/milestones-block }}
+        {{/if}}
+        {{/each}}
+    </div>
+</div>
+
+<h3 class="center-align">Knowledge</h3>
+<div class="container">
+    <div class="collection">
+        {{#each resolution}}
+        {{#if knowledge}}
+        <a id="selectedResolution" value={{id}} class="collection-item purple white-text">{{title}}</a>
+        {{> milestones/milestones-block }}
+        {{/if}}
         {{/each}}
     </div>
 </div>
