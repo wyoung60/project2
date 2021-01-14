@@ -1,6 +1,8 @@
 // const Resolution = require("../models/resolution");
 const db = require("../models");
 const passport = require("../config/passport");
+const resolution = require("../models/resolution");
+const e = require("express");
 
 //Routes
 module.exports = (app) => {
@@ -11,15 +13,34 @@ module.exports = (app) => {
 
   //Route to add new resolution
   app.get("/new", (req, res) => {
+    res.render("newResolution");
+  });
+
+  app.get("/view", (req, res) => {
+    const resolutionArray = [];
     db.resolution.findAll({}).then((results) => {
-      const resolutionArray = [];
       results.forEach((element) => {
         resolutionArray.push(element.dataValues);
       });
-      const hbsObject = {
-        resolution: resolutionArray,
-      };
-      res.render("newResolution", hbsObject);
+
+      db.Goals.findAll({}).then((results) => {
+        const goalsArray = [];
+        results.forEach((element) => {
+          goalsArray.push(element.dataValues);
+        });
+        resolutionArray.forEach((element) => {
+          element.goals = [];
+          goalsArray.forEach((item) => {
+            if (element.id === item.resolutionID) {
+              element.goals.push(item);
+            }
+          });
+        });
+        const hbsObject = {
+          resolution: resolutionArray,
+        };
+        res.render("viewAll", hbsObject);
+      });
     });
   });
 
@@ -36,6 +57,15 @@ module.exports = (app) => {
     db.resolution
       .create({ title: req.body.title })
       .then((results) => res.json(results));
+  });
+
+  app.post("/api/goal", (req, res) => {
+    db.Goals.create({
+      goal: req.body.goal,
+      resolutionID: req.body.resolution,
+    }).then((results) => {
+      res.json(results);
+    });
   });
 
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
