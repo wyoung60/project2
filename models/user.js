@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
-  // User.sync()
+  
   User.prototype.validPassword = function (password) {
       return bcrypt.compareSync(password, this.password);
   };
