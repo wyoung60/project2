@@ -1,9 +1,18 @@
 <h1>Resolutions</h1>
 
 
-{{#each resolution}}
+{{!-- {{#each resolution}}
 <div value={{id}}>
     <h3 id="selectedResolution">{{title}}</h3>
-    {{> milestones/milestones-block }}
+
 </div>
-{{/each}}
+{{/each}} --}}
+
+<div class="container">
+    <div class="collection">
+        {{#each resolution}}
+        <a id="selectedResolution" value={{id}} class="collection-item purple white-text">{{title}}</a>
+        {{> milestones/milestones-block }}
+        {{/each}}
+    </div>
+</div>

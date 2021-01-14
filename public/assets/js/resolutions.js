@@ -16,11 +16,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
     selectedResolution.forEach((item) => {
       item.addEventListener("click", () => {
         milestoneInput.value = "";
-        let parentDiv = item.parentElement;
         milestones.textContent = "Add Milestone";
-        parentDiv.appendChild(milestoneInput);
-        parentDiv.appendChild(milestones);
-        newGoal.resolution = parentDiv.getAttribute("value");
+        item.insertAdjacentElement("afterend", milestoneInput);
+        milestoneInput.insertAdjacentElement("afterend", milestones);
+        newGoal.resolution = item.getAttribute("value");
       });
     });
   }
@@ -32,17 +31,17 @@ document.addEventListener("DOMContentLoaded", (e) => {
       }
       newGoal.goal = milestoneInput.value;
       console.log(newGoal);
-      // fetch("/api/resolution", {
-      //   method: "POST",
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(resolutionValue),
-      // }).then((response) => {
-      //   //Reloads page
-      //   location.reload();
-      // });
+      fetch("/api/goal", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newGoal),
+      }).then((response) => {
+        //Reloads page
+        location.reload();
+      });
     });
   }
 
