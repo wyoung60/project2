@@ -1,4 +1,5 @@
 //Front end JS here
+
 //Waits for document to be loaded
 document.addEventListener("DOMContentLoaded", (e) => {
   if (e) {
@@ -54,6 +55,27 @@ document.addEventListener("DOMContentLoaded", (e) => {
       }
       //Gets data from text area
       let resolutionValue = { title: resolutionTextArea.value };
+
+      resolutionCategory = document.querySelector("#resolutionCategory");
+
+      switch (resolutionCategory.getAttribute("value")) {
+        case "mind":
+          resolutionValue.mind = true;
+          resolutionValue.body = false;
+          resolutionValue.knowledge = false;
+          break;
+        case "body":
+          resolutionValue.mind = false;
+          resolutionValue.body = true;
+          resolutionValue.knowledge = false;
+          break;
+        case "knowledge":
+          resolutionValue.mind = false;
+          resolutionValue.body = false;
+          resolutionValue.knowledge = true;
+          break;
+      }
+      console.log(resolutionValue);
       //Calls post from api-routes
       fetch("/api/resolution", {
         method: "POST",
