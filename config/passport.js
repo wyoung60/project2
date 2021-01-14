@@ -9,6 +9,7 @@ passport.use(
       usernameField: "email",
     },
     (email, password, done) => {
+      
       db.User.findOne({
         where: {
           email: email,

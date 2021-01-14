@@ -1,16 +1,19 @@
 // const Resolution = require("../models/resolution");
 const db = require("../models");
 const passport = require("../config/passport");
+const isAuthenticated = require('../config/middleware/isAuthenticated')
+
 
 //Routes
 module.exports = (app) => {
   //Opening route
   app.get("/", (req, res) => {
-    res.render("index");
+    console.log(req.user)
+    res.render("index", { user: req.user });
   });
 
   //Route to add new resolution
-  app.get("/new", (req, res) => {
+  app.get("/new", isAuthenticated, (req, res) => {
     db.resolution.findAll({}).then((results) => {
       const resolutionArray = [];
       results.forEach((element) => {
@@ -27,8 +30,26 @@ module.exports = (app) => {
     res.render("login");
   });
 
+  app.post("/login", passport.authenticate("local"), (req, res) => {
+    res.redirect("/");
+    
+  });
+
   app.get("/signup", (req, res) => {
     res.render("signup");
+  });
+
+  app.post("/signup", (req, res) => {
+    db.User.create({
+      email: req.body.email,
+      password: req.body.password,
+    })
+      .then(() => {
+        res.redirect("/login");
+      })
+      .catch((err) => {
+        res.render("signup", { error: "Unable to sign up, try again" });
+      });
   });
 
   //Route to post new resolution
@@ -39,6 +60,7 @@ module.exports = (app) => {
   });
 
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
+    req.session.email = req.user.email
     res.json(req.user);
   });
 

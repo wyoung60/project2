@@ -16,7 +16,11 @@
             <a href="/" class="brand-logo center purple-text text-darken-4">Logo</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a class="purple-text darken-2" href="/about">About</a></li>
+                {{#if user}}
+                <li><a class="purple-text darken-2" href="/logout">Logout</a></li>
+                {{else}}
                 <li><a class="purple-text darken-2" href="/login">Login/Sign Up</a></li>
+                {{/if}}
                 <li><a class="purple-text darken-2" href="/contact">Contact</a></li>
             </ul>
         </div>
