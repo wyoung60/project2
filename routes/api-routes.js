@@ -10,50 +10,44 @@ const isAuthenticated = require('../config/middleware/isAuthenticated')
 module.exports = (app) => {
   //Opening route
   app.get("/", (req, res) => {
-    console.log(req.user)
     res.render("index", { user: req.user });
   });
 
   //Route to add new resolution
   app.get("/mind", isAuthenticated, (req, res) => {
-    res.render("newResolutionMind");
+    res.render("newResolutionMind", { user: req.user });
   });
 
   app.get("/body", isAuthenticated, (req, res) => {
-    res.render("newResolutionBody");
+    res.render("newResolutionBody", { user: req.user });
   });
 
   app.get("/knowledge", isAuthenticated, (req, res) => {
-    res.render("newResolutionKnowledge");
+    res.render("newResolutionKnowledge", { user: req.user });
   });
 
   app.get("/view", isAuthenticated, (req, res) => {
-    const resolutionArray = [];
-    db.resolution.findAll({}).then((results) => {
-      results.forEach((element) => {
-        resolutionArray.push(element.dataValues);
+    db.Resolution.findAll({
+      include: db.Goals,
+      where: {
+        UserId: req.user.id,
+      },
+    }).then((results) => {
+      
+      const resolutionArray = results.map(resolution => {
+        const goals = resolution.dataValues.Goals.map(goal => goal.dataValues);
+        return {
+          ...resolution.dataValues,
+          goals: goals,
+        }  
       });
-
-      db.Goals.findAll({}).then((results) => {
-        const goalsArray = [];
-        results.forEach((element) => {
-          goalsArray.push(element.dataValues);
-        });
-        resolutionArray.forEach((element) => {
-          element.goals = [];
-          goalsArray.forEach((item) => {
-            if (element.id === item.resolutionID) {
-              element.goals.push(item);
-            }
-          });
-        });
         const hbsObject = {
           resolution: resolutionArray,
+          user: req.user,
         };
         res.render("viewAll", hbsObject);
       });
     });
-  });
 
   app.get("/login", (req, res) => {
     res.render("login");
@@ -82,13 +76,14 @@ module.exports = (app) => {
   });
 
   //Route to post new resolution
-  app.post("/api/resolution", (req, res) => {
-    db.resolution
+  app.post("/api/resolution", isAuthenticated, (req, res) => {
+    db.Resolution
       .create({
         title: req.body.title,
         mind: req.body.mind,
         body: req.body.body,
         knowledge: req.body.knowledge,
+        UserId: req.user.id
       })
       .then((results) => res.json(results));
   });
@@ -96,7 +91,7 @@ module.exports = (app) => {
   app.post("/api/goal", (req, res) => {
     db.Goals.create({
       goal: req.body.goal,
-      resolutionID: req.body.resolution,
+      ResolutionId: req.body.resolution,
     }).then((results) => {
       res.json(results);
     });
@@ -138,3 +133,4 @@ module.exports = (app) => {
     }
   });
 };
+
