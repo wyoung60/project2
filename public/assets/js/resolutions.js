@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const submitButton = document.querySelector("#submitButton");
   const resolutionTextArea = document.querySelector("#resolution");
   const selectedResolution = document.querySelectorAll("#selectedResolution");
+  const goalsDiv = document.querySelectorAll("#goalsDiv");
   const milestones = document.createElement("button");
   const milestoneInput = document.createElement("textarea");
   const newGoal = { goal: "", resolution: "" };
@@ -16,11 +17,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
   if (selectedResolution) {
     selectedResolution.forEach((item) => {
       item.addEventListener("click", () => {
+        goalsDiv.forEach((item) => {
+          item.style.display = "none";
+        });
         milestoneInput.value = "";
         milestones.textContent = "Add Milestone";
         item.insertAdjacentElement("afterend", milestoneInput);
         milestoneInput.insertAdjacentElement("afterend", milestones);
         newGoal.resolution = item.getAttribute("value");
+        const goalDiv = milestones.nextElementSibling;
+        goalDiv.style.display = "block";
       });
     });
   }

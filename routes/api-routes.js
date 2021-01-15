@@ -1,10 +1,6 @@
-// const Resolution = require("../models/resolution");
 const db = require("../models");
 const passport = require("../config/passport");
-const resolution = require("../models/resolution");
-const e = require("express");
-const isAuthenticated = require('../config/middleware/isAuthenticated')
-
+const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 //Routes
 module.exports = (app) => {
@@ -33,21 +29,22 @@ module.exports = (app) => {
         UserId: req.user.id,
       },
     }).then((results) => {
-      
-      const resolutionArray = results.map(resolution => {
-        const goals = resolution.dataValues.Goals.map(goal => goal.dataValues);
+      const resolutionArray = results.map((resolution) => {
+        const goals = resolution.dataValues.Goals.map(
+          (goal) => goal.dataValues
+        );
         return {
           ...resolution.dataValues,
           goals: goals,
-        }  
-      });
-        const hbsObject = {
-          resolution: resolutionArray,
-          user: req.user,
         };
-        res.render("viewAll", hbsObject);
       });
+      const hbsObject = {
+        resolution: resolutionArray,
+        user: req.user,
+      };
+      res.render("viewAll", hbsObject);
     });
+  });
 
   app.get("/login", (req, res) => {
     res.render("login");
@@ -55,7 +52,6 @@ module.exports = (app) => {
 
   app.post("/login", passport.authenticate("local"), (req, res) => {
     res.redirect("/");
-    
   });
 
   app.get("/signup", (req, res) => {
@@ -77,15 +73,13 @@ module.exports = (app) => {
 
   //Route to post new resolution
   app.post("/api/resolution", isAuthenticated, (req, res) => {
-    db.Resolution
-      .create({
-        title: req.body.title,
-        mind: req.body.mind,
-        body: req.body.body,
-        knowledge: req.body.knowledge,
-        UserId: req.user.id
-      })
-      .then((results) => res.json(results));
+    db.Resolution.create({
+      title: req.body.title,
+      mind: req.body.mind,
+      body: req.body.body,
+      knowledge: req.body.knowledge,
+      UserId: req.user.id,
+    }).then((results) => res.json(results));
   });
 
   app.post("/api/goal", (req, res) => {
@@ -98,7 +92,7 @@ module.exports = (app) => {
   });
 
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
-    req.session.email = req.user.email
+    req.session.email = req.user.email;
     res.json(req.user);
   });
 
@@ -133,4 +127,3 @@ module.exports = (app) => {
     }
   });
 };
-

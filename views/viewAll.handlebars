@@ -6,7 +6,7 @@
         {{#each resolution}}
         {{#if mind}}
         <a id="selectedResolution" value={{id}} class="collection-item purple white-text">{{title}}</a>
-        {{> milestones/milestones-block }}
+        <div id="goalsDiv" style="display:none"> {{> milestones/milestones-block }}</div>
         {{/if}}
         {{/each}}
     </div>
@@ -18,7 +18,7 @@
         {{#each resolution}}
         {{#if body}}
         <a id="selectedResolution" value={{id}} class="collection-item purple white-text">{{title}}</a>
-        {{> milestones/milestones-block }}
+        <div id="goalsDiv" style="display:none"> {{> milestones/milestones-block }}</div>
         {{/if}}
         {{/each}}
     </div>
@@ -30,7 +30,7 @@
         {{#each resolution}}
         {{#if knowledge}}
         <a id="selectedResolution" value={{id}} class="collection-item purple white-text">{{title}}</a>
-        {{> milestones/milestones-block }}
+        <div id="goalsDiv" style="display:none"> {{> milestones/milestones-block }}</div>
         {{/if}}
         {{/each}}
     </div>
