@@ -6,7 +6,13 @@ const isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = (app) => {
   //Opening route
   app.get("/", (req, res) => {
-    res.render("index", { user: req.user });
+    res.render("index");
+  });
+
+  app.get("/home", isAuthenticated, (req, res) => {
+    db.User.findOne({ where: { email: req.user.email } }).then(() => {
+      res.render("index", { user: req.user });
+    });
   });
 
   //Route to add new resolution
@@ -51,7 +57,7 @@ module.exports = (app) => {
   });
 
   app.post("/login", passport.authenticate("local"), (req, res) => {
-    res.redirect("/");
+    res.redirect("/home");
   });
 
   app.get("/signup", (req, res) => {
