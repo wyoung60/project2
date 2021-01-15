@@ -4,11 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     mind: DataTypes.BOOLEAN,
     body: DataTypes.BOOLEAN,
     knowledge: DataTypes.BOOLEAN,
-    
   });
-  Resolution.associate = (models, options) => {
-    Resolution.belongsTo(models.User, options)
-    Resolution.hasMany(models.Goals)
-}
+  Resolution.associate = (models) => {
+    Resolution.belongsTo(models.User);
+    Resolution.hasMany(models.Goals);
+  };
   return Resolution;
 };
