@@ -1,18 +1,34 @@
 //Dependencies
 const express = require("express");
+const exphbs = require("express-handlebars");
+const session = require("express-session");
+const passport = require("passport");
+const db = require("./models");
 
 //Instance of express
 const app = express();
 //Create PORT
 const PORT = process.env.PORT || 8080;
 
+app.use(express.static("public"));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+//Boilerplate for handlebars
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+app.use(
+  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Get routes
 require(".//routes/api-routes")(app);
 
-//Add handlebars
-
 //Start server
-app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
+db.sequelize.sync().then(() => {
+  app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
+});
