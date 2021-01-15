@@ -1,6 +1,6 @@
-// const Resolution = require("../models/resolution");
 const db = require("../models");
 const passport = require("../config/passport");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 //Routes
 module.exports = (app) => {
@@ -9,17 +9,46 @@ module.exports = (app) => {
     res.render("index");
   });
 
+  app.get("/home", isAuthenticated, (req, res) => {
+    db.User.findOne({ where: { email: req.user.email } }).then(() => {
+      res.render("index", { user: req.user });
+    });
+  });
+
   //Route to add new resolution
-  app.get("/new", (req, res) => {
-    db.resolution.findAll({}).then((results) => {
-      const resolutionArray = [];
-      results.forEach((element) => {
-        resolutionArray.push(element.dataValues);
+  app.get("/mind", isAuthenticated, (req, res) => {
+    res.render("newResolutionMind", { user: req.user });
+  });
+
+  app.get("/body", isAuthenticated, (req, res) => {
+    res.render("newResolutionBody", { user: req.user });
+  });
+
+  app.get("/knowledge", isAuthenticated, (req, res) => {
+    res.render("newResolutionKnowledge", { user: req.user });
+  });
+
+  app.get("/view", isAuthenticated, (req, res) => {
+    db.Resolution.findAll({
+      include: db.Goals,
+      where: {
+        UserId: req.user.id,
+      },
+    }).then((results) => {
+      const resolutionArray = results.map((resolution) => {
+        const goals = resolution.dataValues.Goals.map(
+          (goal) => goal.dataValues
+        );
+        return {
+          ...resolution.dataValues,
+          goals: goals,
+        };
       });
       const hbsObject = {
         resolution: resolutionArray,
+        user: req.user,
       };
-      res.render("newResolution", hbsObject);
+      res.render("viewAll", hbsObject);
     });
   });
 
@@ -27,18 +56,51 @@ module.exports = (app) => {
     res.render("login");
   });
 
+  app.post("/login", passport.authenticate("local"), (req, res) => {
+    res.redirect("/home");
+  });
+
   app.get("/signup", (req, res) => {
     res.render("signup");
   });
 
+  app.post("/signup", (req, res) => {
+    db.User.create({
+      email: req.body.email,
+      password: req.body.password,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+    })
+      .then(() => {
+        res.redirect("/login");
+      })
+      .catch((err) => {
+        res.render("signup", { error: "Unable to sign up, try again" });
+      });
+  });
+
   //Route to post new resolution
-  app.post("/api/resolution", (req, res) => {
-    db.resolution
-      .create({ title: req.body.title })
-      .then((results) => res.json(results));
+  app.post("/api/resolution", isAuthenticated, (req, res) => {
+    db.Resolution.create({
+      title: req.body.title,
+      mind: req.body.mind,
+      body: req.body.body,
+      knowledge: req.body.knowledge,
+      UserId: req.user.id,
+    }).then((results) => res.json(results));
+  });
+
+  app.post("/api/goal", (req, res) => {
+    db.Goals.create({
+      goal: req.body.goal,
+      ResolutionId: req.body.resolution,
+    }).then((results) => {
+      res.json(results);
+    });
   });
 
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
+    req.session.email = req.user.email;
     res.json(req.user);
   });
 

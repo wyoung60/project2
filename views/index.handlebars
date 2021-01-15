@@ -1,3 +1,11 @@
+{{#if user}}
+{{!-- {{#each user}} --}}
+<div class="row">
+    <h4 class="center-align">Welcome {{user.first_name}} {{user.last_name}}, time to work!</h4>
+</div>
+{{!-- {{/each}} --}}
+{{else}}
+{{/if}}
 <div class="row">
     <div class="col s12 m12 l8 offset-l2">
         <div class="card purple darken-1 hoverable">
@@ -7,7 +15,7 @@
                     meditate, relax, and unwind.</p>
             </div>
             <div class="card-action">
-                <a href="/new">This is a link</a>
+                <a href="/mind">This is a link</a>
             </div>
         </div>
     </div>
@@ -21,7 +29,7 @@
                 </p>
             </div>
             <div class="card-action">
-                <a href="/new">This is a link</a>
+                <a href="/body">This is a link</a>
             </div>
         </div>
     </div>
@@ -35,7 +43,7 @@
                     learning or any new skill you want to gain. </p>
             </div>
             <div class="card-action">
-                <a href="/new">This is a link</a>
+                <a href="/knowledge">This is a link</a>
             </div>
         </div>
     </div>

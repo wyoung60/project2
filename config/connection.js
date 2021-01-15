@@ -2,7 +2,7 @@
 const Sequelize = require("sequelize");
 
 //Connection to mySQL
-const sequelize = new Sequelize("resolution_db", "root", "Duquesne1029!", {
+const sequelize = new Sequelize("resolution_db", "root", "", {
   host: "localhost",
   port: 3306,
   dialect: "mysql",

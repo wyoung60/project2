@@ -1,12 +1,13 @@
+// Decided to not do it this way. It's simpler to use forms without JS
 const signUpForm = document.querySelector("#signup");
 const emailInput = document.querySelector("#email-input");
 const passwordInput = document.querySelector("#password-input");
 
-signUpForm.addEventListener("click", (event) => {
+signUpForm.addEventListener("submit", (event) => {
   event.preventDefault();
   let userData = {
-    email: emailInput.val().trim(),
-    password: passwordInput.val().trim(),
+    email: emailInput.value.trim(),
+    password: passwordInput.value.trim(),
   };
 
   if (!userData.email || !userData.password) {
@@ -14,8 +15,8 @@ signUpForm.addEventListener("click", (event) => {
   }
 
   signUpUser(userData.email, userData.password);
-  emailInput.val("");
-  passwordInput.val("");
+  emailInput.value = "";
+  passwordInput.value = "";
 });
 
 const signUpUser = (email, password) => {
