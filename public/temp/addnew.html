@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Resolutions</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
     <!--Import Google Icon Font-->
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <!--Import materialize.css-->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
@@ -45,71 +46,36 @@
         </ul>
       </div>
     </nav>
+    <br /><br /><br /><br /><br /><br />
 
-    <div class="container">
-      <div class="collection">
-        <a href="#" class="collection-item purple white-text">Resolution 1</a>
-        <div class="row">
-          <div class="col push-s2">
-            <button
-              class="btn purple waves-effect waves-light"
-              type="submit"
-              name="action"
-            >
-              Add Milestone <i class="material-icons right">stars</i>
-            </button>
-          </div>
-        </div>
-        <a href="#" class="collection-item purple white-text">Resolution 2</a>
-        <div class="row">
-          <div class="col push-s2">
-            <button
-              class="btn purple waves-effect waves-light"
-              type="submit"
-              name="action"
-            >
-              Add Milestone <i class="material-icons right">stars</i>
-            </button>
-          </div>
-        </div>
-        <a href="#" class="collection-item purple white-text">Resolution 3</a>
-        <div class="row">
-          <div class="col push-s2">
-            <button
-              class="btn purple waves-effect waves-light"
-              type="submit"
-              name="action"
-            >
-              Add Milestone <i class="material-icons right">stars</i>
-            </button>
-          </div>
-        </div>
-        <a href="#" class="collection-item purple white-text">Resolution 4</a>
-        <div class="row">
-          <div class="col push-s2">
-            <button
-              class="btn purple waves-effect waves-light"
-              type="submit"
-              name="action"
-            >
-              Add Milestone <i class="material-icons right">stars</i>
-            </button>
-          </div>
-        </div>
-        <a href="#" class="collection-item purple white-text">Resolution 5</a>
-        <div class="row">
-          <div class="col push-s2">
-            <button
-              class="btn purple waves-effect waves-light"
-              type="submit"
-              name="action"
-            >
-              Add Milestone <i class="material-icons right">stars</i>
-            </button>
+    <main>
+      <div class="row">
+        <div class="col s6 push-s1">
+          <h1 class="purple-text text-darken-4">Your Resolutions</h1>
+          <div class="row">
+            <div class="col s12 push-s3">
+              <div class="input-field">
+                <input type="text" id="resolution" />
+                <label for="resolution">Tell us about your resolution.</label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <div class="row">
+        <div class="col push-s2">
+          <button
+            class="btn purple waves-effect waves-light"
+            type="submit"
+            name="action"
+          >
+            Submit <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </div>
+    </main>
+    <br /><br /><br /><br /><br /><br /><br />
+
     <footer class="page-footer orange darken-2">
       <div class="container">
         <div class="row">
@@ -120,7 +86,7 @@
             </p>
           </div>
           <div class="col l4 offset-l2 s12">
-            <h5 class="purple-text text-darken-2">Links</h5>
+            <h5 class="purple-text">Links</h5>
             <ul>
               <li><a class="purple-text text-darken-2" href="#!">About</a></li>
               <li>
@@ -136,8 +102,8 @@
           </div>
         </div>
       </div>
-      <div class="footer-copyright">
-        <div class="container">
+      <div class="footer-copyright orange darken-4">
+        <div class="container orange darken-4">
           © 2020 Copyright Team Caboose
           <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
         </div>
