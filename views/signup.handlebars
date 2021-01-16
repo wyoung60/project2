@@ -1,33 +1,58 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <h2>Sign Up Form</h2>
-      <form action="/signup" method="post" id="signup">
-        <div class="form-group">
-          <label for="first_name">First Name</label>
-          <input name="first_name" type="name" class="form-control" id="firstNameInput" placeholder="First Name">
+<br /><br /><br /><br /><br /><br />
+
+<div class="row">
+  <div class="col s6 push-s1">
+    <h1 class="purple-text text-darken-4">Sign Up</h1>
+    <form action="/signup" method="post" id="signup">
+      <div class="row">
+        <div class="col s12 push-s3">
+          <div class="input-field">
+            <input name="first_name" type="email" id="first_name" />
+            <label for="first_name">First Name</label>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="last_name">Last Name</label>
-          <input name="last_name" type="name" class="form-control" id="lastNameInput" placeholder="Last Name">
+      </div>
+      <div class="row">
+        <div class="col s12 push-s3">
+          <div class="input-field">
+            <input name="last_name" type="email" id="last_name" />
+            <label for="last_name">Last Name</label>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input name="email" type="email" class="form-control" id="email-input" placeholder="Email">
+      </div>
+      <div class="row">
+        <div class="col s12 push-s3">
+          <div class="input-field">
+            <input name="email" type="email" id="email" />
+            <label for="email">Email</label>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input name="password" type="password" class="form-control" id="password-input" placeholder="Password">
+      </div>
+      <div class="row">
+        <div class="col s12 push-s3">
+          <div class="input-field">
+            <input name="password" type="password" id="password" />
+            <label for="password">Password</label>
+          </div>
         </div>
-        <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-          <span class="sr-only">Error:</span> <span class="msg"></span>
+      </div>
+      <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span> <span class="msg"></span>
+      </div>
+      <div class="row">
+        <div class="col push-s2">
+          <button class="btn purple waves-effect waves-light" type="submit" name="action">
+            Submit<i class="material-icons right">send</i>
+          </button>
         </div>
-        <button type="submit" class="btn btn-default">Sign Up</button>
+      </div>
+      <div class="row">
         <p class="red-text">{{error}}</p>
-      </form>
-      <br />
-      <p>Or log in <a href="/login">here</a></p>
+      </div>
+    </form>
+    <div class="row">
+      <p class="col push-s2">Or log in <a href="/login">here</a></p>
     </div>
   </div>
 </div>
