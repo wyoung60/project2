@@ -11,22 +11,38 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const selectedResolution = document.querySelectorAll("#selectedResolution");
   const goalsDiv = document.querySelectorAll("#goalsDiv");
   const milestones = document.createElement("button");
-  const milestoneInput = document.createElement("textarea");
+  const milestoneInput = document.createElement("input");
+  const milestoneInputLabel = document.createElement("label");
+  const milestoneDiv = document.createElement("div");
+  const completeButton = document.querySelectorAll("completeButton");
   const newGoal = { goal: "", resolution: "" };
 
   if (selectedResolution) {
     selectedResolution.forEach((item) => {
       item.addEventListener("click", () => {
+        milestoneInput.value = "";
         goalsDiv.forEach((item) => {
           item.style.display = "none";
         });
-        milestoneInput.value = "";
+        milestoneDiv.setAttribute("class", "input-field col s12");
+        milestoneInput.setAttribute("type", "text");
+        milestoneInput.setAttribute("id", "milestone");
+        milestoneInputLabel.setAttribute("for", "milestone");
+        milestoneInputLabel.textContent =
+          "What goals will help you achieve your resolution?";
+        milestones.setAttribute("id", "milestone");
         milestones.textContent = "Add Milestone";
-        item.insertAdjacentElement("afterend", milestoneInput);
-        milestoneInput.insertAdjacentElement("afterend", milestones);
+        milestones.setAttribute(
+          "class",
+          "purple white-text waves-effect waves-light btn-flat"
+        );
         newGoal.resolution = item.getAttribute("value");
-        const goalDiv = milestones.nextElementSibling;
+        const goalDiv = item.nextElementSibling;
         goalDiv.style.display = "block";
+        goalDiv.appendChild(milestoneDiv);
+        milestoneDiv.appendChild(milestoneInput);
+        milestoneInput.insertAdjacentElement("afterend", milestoneInputLabel);
+        milestoneInputLabel.insertAdjacentElement("afterend", milestones);
       });
     });
   }
