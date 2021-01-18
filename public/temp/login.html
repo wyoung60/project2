@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Login</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
     <!--Import Google Icon Font-->
     <link
@@ -21,68 +22,79 @@
     <nav>
       <div class="nav-wrapper s12 m6 orange darken-2">
         <a href="#" class="brand-logo center purple-text text-darken-4">Logo</a>
-        <ul id="nav-mobile" class="rightoch hide-on-med-and-down">
+        <a href="#" data-target="mobile" class="sidenav-trigger"
+          ><i class="material-icons">menu</i></a
+        >
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
           <li>
             <a
               class="btn waves-effect waves-light orange darken-4 purple-text darken-2"
               href="/about"
-              >About</a
+              >Home</a
             >
           </li>
           <li>
             <a
               class="btn waves-effect waves-light orange darken-4 purple-text darken-2"
               href="/login"
-              >Login/Sign Up</a
+              >Login</a
             >
           </li>
           <li>
             <a
               class="btn waves-effect waves-light orange darken-4 purple-text darken-2"
               href="/contact"
-              >Contact</a
+              >View All</a
             >
           </li>
         </ul>
       </div>
     </nav>
-    <br /><br /><br /><br /><br /><br />
+
+    <ul class="sidenav" id="mobile">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Login</a></li>
+      <li><a href="#">View All</a></li>
+    </ul>
+    <br /><br /><br /><br /><br /><br /><br />
 
     <main>
       <div class="row">
-        <div class="col s4 push-s2 purple-text text-darken-4">
-          <h1>Login</h1>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s6 push-s3">
-          <div class="input-field">
-            <input type="text" id="email" />
-            <label for="email">Email</label>
+        <div class="container">
+          <div class="col s4 purple-text text-darken-4">
+            <h1>Login</h1>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s6 push-s3">
-          <div class="input-field">
-            <input type="text" id="password" />
-            <label for="password">Password</label>
+          <div class="row">
+            <div class="col s12">
+              <div class="input-field">
+                <input type="text" id="email" />
+                <label for="email">Email</label>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col push-s2">
-          <button
-            class="btn purple waves-effect waves-light"
-            type="submit"
-            name="action"
-          >
-            Log In <i class="material-icons right">done</i>
-          </button>
+          <div class="row">
+            <div class="col s12">
+              <div class="input-field">
+                <input type="text" id="password" />
+                <label for="password">Password</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <button
+                class="btn purple waves-effect waves-light"
+                type="submit"
+                name="action"
+              >
+                Log In <i class="material-icons right">done</i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </main>
-    <br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br /><br /><br />
 
     <footer class="page-footer orange darken-2">
       <div class="container">
