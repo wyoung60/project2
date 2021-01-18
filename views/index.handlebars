@@ -1,10 +1,30 @@
+
 {{#if user}}
-{{!-- {{#each user}} --}}
+
 <div class="row">
     <h4 class="center-align">Welcome {{user.first_name}} {{user.last_name}}, time to work!</h4>
 </div>
-{{!-- {{/each}} --}}
+
 {{else}}
+{{/if}}
+
+{{#if user}}
+<main class="flex-row justify-center align-center col-auto p-4 bg-light">
+      <section class="card card-rounded col-7 bg-white">
+        <header class="card-header text-center">
+        </header>
+        <div class="text-center pt-4">
+          <button class="btn btn-danger" id="fetch-button">
+            Click Me
+          </button>
+        </div>
+        <table class="card-body table mx-auto my-4">
+          <tbody id="repo-table" class="mx-auto text-center"></tbody>
+        </table>
+      </section>
+      <script src="/assets/js/outside_api.js"></script>
+    </main>
+    {{else}}
 {{/if}}
 <div class="row">
     <div class="col s12 m12 l8 offset-l2">
@@ -48,3 +68,6 @@
         </div>
     </div>
 </div>
+
+<script src="/assets/js/outside_api.js"></script>
+{{!-- {{/if}} --}}{{!-- {{#if user}} --}}
