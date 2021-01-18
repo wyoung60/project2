@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
   if (e) {
     console.info("DOM loaded");
   }
+
+  var elems = document.querySelectorAll(".sidenav");
+  M.Sidenav.init(elems);
   //Traversing the DOM variables
   const submitButton = document.querySelector("#submitButton");
   const resolutionTextArea = document.querySelector("#resolution");

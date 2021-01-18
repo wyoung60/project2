@@ -19,7 +19,7 @@
         <div class="nav-wrapper s12 m6 orange darken-2">
             <a href="#" class="brand-logo center purple-text text-darken-4">Logo</a>
             <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <ul class="left hide-on-med-and-down">
                 <li>
                     {{#if user}}
                     <a class="btn waves-effect waves-light orange darken-4 purple-text darken-2" href="/Home">Home</a>
@@ -43,6 +43,27 @@
             </ul>
         </div>
     </nav>
+
+    <ul class="sidenav" id="mobile">
+        <li>
+            {{#if user}}
+            <a class="btn waves-effect waves-light orange darken-4 purple-text darken-2" href="/Home">Home</a>
+            {{else}}
+            <a class="btn waves-effect waves-light orange darken-4 purple-text darken-2" href="/">Home</a>
+            {{/if}}
+        </li>
+        <li>
+            {{#if user}}
+            <a class="btn waves-effect waves-light orange darken-4 purple-text darken-2" href="/logout">Logout</a>
+            {{else}}
+            <a class="btn waves-effect waves-light orange darken-4 purple-text darken-2" href="/login">Login/Sign Up</a>
+            {{/if}}
+        </li>
+        <li>
+            <a class="btn waves-effect waves-light orange darken-4 purple-text darken-2" href="/view">View
+                All</a>
+        </li>
+    </ul>
     {{{body}}}
     <footer class="page-footer orange darken-2">
         <div class="container">
