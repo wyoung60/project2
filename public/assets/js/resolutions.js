@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const milestoneInput = document.createElement("input");
   const milestoneInputLabel = document.createElement("label");
   const milestoneDiv = document.createElement("div");
-  const completeButton = document.querySelectorAll("completeButton");
+  const completeButton = document.querySelectorAll("#completeButton");
   const newGoal = { goal: "", resolution: "" };
 
   if (selectedResolution) {
@@ -50,13 +50,38 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
   }
 
+  if (completeButton) {
+    completeButton.forEach((button) => {
+      button.addEventListener("click", () => {
+        const goalValue = button.parentElement.getAttribute("value");
+        fetch("/api/update", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: goalValue }),
+        }).then((response) => {});
+        button.setAttribute(
+          "class",
+          "purple white-text waves-effect waves-light btn-small right disabled"
+        );
+        button.setAttribute("id", "completeButton");
+        button.textContent = "";
+        const starElement = document.createElement("i");
+        starElement.textContent = "stars";
+        starElement.setAttribute("class", "material-icons");
+        button.appendChild(starElement);
+      });
+    });
+  }
+
   if (milestones) {
     milestones.addEventListener("click", () => {
       if (!milestoneInput.value) {
         return;
       }
       newGoal.goal = milestoneInput.value;
-      console.log(newGoal);
       fetch("/api/goal", {
         method: "POST",
         headers: {
@@ -100,7 +125,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
           resolutionValue.knowledge = true;
           break;
       }
-      console.log(resolutionValue);
       //Calls post from api-routes
       fetch("/api/resolution", {
         method: "POST",
