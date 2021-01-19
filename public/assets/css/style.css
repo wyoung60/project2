@@ -1,3 +1,24 @@
 #completeButton {
   width: 100px;
 }
+
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body > nav {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+body > #content {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+body > footer {
+  flex-shrink: 0;
+}
