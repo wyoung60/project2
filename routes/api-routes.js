@@ -58,13 +58,15 @@ module.exports = (app) => {
 
   app.post("/login", (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
-      if (!user) res.render("login", { error: info.message});
-    else {
-      req.logIn(user, (err) => {
-        if (err) { return next(err); }
-        return res.redirect('/home');
-      });
-    }
+      if (!user) res.render("login", { error: info.message });
+      else {
+        req.logIn(user, (err) => {
+          if (err) {
+            return next(err);
+          }
+          return res.redirect("/home");
+        });
+      }
     })(req, res, next);
   });
 
@@ -104,6 +106,17 @@ module.exports = (app) => {
       ResolutionId: req.body.resolution,
     }).then((results) => {
       res.json(results);
+    });
+  });
+
+  app.post("/api/update", (req, res) => {
+    db.Goals.update(
+      {
+        completed: true,
+      },
+      { where: { id: req.body.id } }
+    ).then(() => {
+      res.end();
     });
   });
 
