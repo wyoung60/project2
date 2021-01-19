@@ -155,4 +155,16 @@ module.exports = (app) => {
       });
     }
   });
+
+  app.delete("/api/delete", isAuthenticated, (req, res) => {
+    db.Goals.destroy({
+      where: { ResolutionId: req.body.id },
+    }).then(() => {
+      db.Resolution.destroy({
+        where: { id: req.body.id },
+      }).then(() => {
+        res.redirect("/view");
+      });
+    });
+  });
 };

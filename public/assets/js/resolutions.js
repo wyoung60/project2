@@ -13,11 +13,12 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const resolutionTextArea = document.querySelector("#resolution");
   const selectedResolution = document.querySelectorAll("#selectedResolution");
   const goalsDiv = document.querySelectorAll("#goalsDiv");
+  const deleteButton = document.querySelectorAll("#deleteButton");
+  const completeButton = document.querySelectorAll("#completeButton");
   const milestones = document.createElement("button");
   const milestoneInput = document.createElement("input");
   const milestoneInputLabel = document.createElement("label");
   const milestoneDiv = document.createElement("div");
-  const completeButton = document.querySelectorAll("#completeButton");
   const newGoal = { goal: "", resolution: "" };
 
   if (selectedResolution) {
@@ -69,7 +70,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         button.setAttribute("id", "completeButton");
         button.textContent = "";
         const starElement = document.createElement("i");
-        starElement.textContent = "stars";
+        starElement.textContent = "beenhere";
         starElement.setAttribute("class", "material-icons");
         button.appendChild(starElement);
       });
@@ -136,6 +137,24 @@ document.addEventListener("DOMContentLoaded", (e) => {
       }).then((response) => {
         //Reloads page
         location.reload();
+      });
+    });
+  }
+
+  if (deleteButton) {
+    deleteButton.forEach((button) => {
+      button.addEventListener("click", () => {
+        const resolutionId = button.parentElement.getAttribute("value");
+        fetch("/api/delete", {
+          method: "DELETE",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: resolutionId }),
+        }).then(() => {
+          location.reload();
+        });
       });
     });
   }
