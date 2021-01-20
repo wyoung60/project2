@@ -5,8 +5,13 @@
     <div class="collection">
         {{#each resolution}}
         {{#if mind}}
-        <a id="selectedResolution" value={{id}} class="collection-item purple white-text">{{title}}</a>
-        <div id="goalsDiv" style="display:none"> {{> milestones/milestones-block }}</div>
+        <a id="selectedResolution" value={{id}} class="collection-item purple white-text">{{title}}<button
+                class="purple white-text waves-effect waves-light btn-flat right" id="deleteButton">
+                <i class="material-icons">delete_forever</i>
+            </button>
+            <div class="clearfix"></div>
+        </a>
+        <div class="collection-item" id="goalsDiv" style="display:none"> {{> milestones/milestones-block }}</div>
         {{/if}}
         {{/each}}
     </div>
@@ -17,8 +22,13 @@
     <div class="collection">
         {{#each resolution}}
         {{#if body}}
-        <a id="selectedResolution" value={{id}} class="collection-item purple white-text">{{title}}</a>
-        <div id="goalsDiv" style="display:none"> {{> milestones/milestones-block }}</div>
+        <a id="selectedResolution" value={{id}} class="collection-item purple white-text">{{title}}<button
+                class="purple white-text waves-effect waves-light btn-flat right" id="deleteButton">
+                <i class="material-icons">delete_forever</i>
+            </button>
+            <div class="clearfix"></div>
+        </a>
+        <div class="collection-item" id="goalsDiv" style="display:none"> {{> milestones/milestones-block }}</div>
         {{/if}}
         {{/each}}
     </div>
@@ -29,8 +39,13 @@
     <div class="collection">
         {{#each resolution}}
         {{#if knowledge}}
-        <a id="selectedResolution" value={{id}} class="collection-item purple white-text">{{title}}</a>
-        <div id="goalsDiv" style="display:none"> {{> milestones/milestones-block }}</div>
+        <a id="selectedResolution" value={{id}} class="collection-item purple white-text">{{title}}<button
+                class="purple white-text waves-effect waves-light btn-flat right" id="deleteButton">
+                <i class="material-icons">delete_forever</i>
+            </button>
+            <div class="clearfix"></div>
+        </a>
+        <div class="collection-item" id="goalsDiv" style="display:none"> {{> milestones/milestones-block }}</div>
         {{/if}}
         {{/each}}
     </div>

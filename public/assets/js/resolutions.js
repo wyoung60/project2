@@ -5,28 +5,74 @@ document.addEventListener("DOMContentLoaded", (e) => {
   if (e) {
     console.info("DOM loaded");
   }
+
+  var elems = document.querySelectorAll(".sidenav");
+  M.Sidenav.init(elems);
   //Traversing the DOM variables
   const submitButton = document.querySelector("#submitButton");
   const resolutionTextArea = document.querySelector("#resolution");
   const selectedResolution = document.querySelectorAll("#selectedResolution");
   const goalsDiv = document.querySelectorAll("#goalsDiv");
+  const deleteButton = document.querySelectorAll("#deleteButton");
+  const completeButton = document.querySelectorAll("#completeButton");
   const milestones = document.createElement("button");
-  const milestoneInput = document.createElement("textarea");
+  const milestoneInput = document.createElement("input");
+  const milestoneInputLabel = document.createElement("label");
+  const milestoneDiv = document.createElement("div");
   const newGoal = { goal: "", resolution: "" };
 
   if (selectedResolution) {
     selectedResolution.forEach((item) => {
       item.addEventListener("click", () => {
+        milestoneInput.value = "";
         goalsDiv.forEach((item) => {
           item.style.display = "none";
         });
-        milestoneInput.value = "";
+        milestoneDiv.setAttribute("class", "input-field col s12");
+        milestoneInput.setAttribute("type", "text");
+        milestoneInput.setAttribute("id", "milestone");
+        milestoneInputLabel.setAttribute("for", "milestone");
+        milestoneInputLabel.textContent =
+          "What goals will help you achieve your resolution?";
+        milestones.setAttribute("id", "milestone");
         milestones.textContent = "Add Milestone";
-        item.insertAdjacentElement("afterend", milestoneInput);
-        milestoneInput.insertAdjacentElement("afterend", milestones);
+        milestones.setAttribute(
+          "class",
+          "purple white-text waves-effect waves-light btn-flat"
+        );
         newGoal.resolution = item.getAttribute("value");
-        const goalDiv = milestones.nextElementSibling;
+        const goalDiv = item.nextElementSibling;
         goalDiv.style.display = "block";
+        goalDiv.appendChild(milestoneDiv);
+        milestoneDiv.appendChild(milestoneInput);
+        milestoneInput.insertAdjacentElement("afterend", milestoneInputLabel);
+        milestoneInputLabel.insertAdjacentElement("afterend", milestones);
+      });
+    });
+  }
+
+  if (completeButton) {
+    completeButton.forEach((button) => {
+      button.addEventListener("click", () => {
+        const goalValue = button.parentElement.getAttribute("value");
+        fetch("/api/update", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: goalValue }),
+        }).then((response) => {});
+        button.setAttribute(
+          "class",
+          "purple white-text waves-effect waves-light btn-small right disabled"
+        );
+        button.setAttribute("id", "completeButton");
+        button.textContent = "";
+        const starElement = document.createElement("i");
+        starElement.textContent = "beenhere";
+        starElement.setAttribute("class", "material-icons");
+        button.appendChild(starElement);
       });
     });
   }
@@ -37,7 +83,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
         return;
       }
       newGoal.goal = milestoneInput.value;
-      console.log(newGoal);
       fetch("/api/goal", {
         method: "POST",
         headers: {
@@ -81,7 +126,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
           resolutionValue.knowledge = true;
           break;
       }
-      console.log(resolutionValue);
       //Calls post from api-routes
       fetch("/api/resolution", {
         method: "POST",
@@ -93,6 +137,24 @@ document.addEventListener("DOMContentLoaded", (e) => {
       }).then((response) => {
         //Reloads page
         location.reload();
+      });
+    });
+  }
+
+  if (deleteButton) {
+    deleteButton.forEach((button) => {
+      button.addEventListener("click", () => {
+        const resolutionId = button.parentElement.getAttribute("value");
+        fetch("/api/delete", {
+          method: "DELETE",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: resolutionId }),
+        }).then(() => {
+          location.reload();
+        });
       });
     });
   }

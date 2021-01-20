@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
   background-color: 494947;
 }
@@ -33,3 +34,29 @@ h2 {
 .btn {
   border-radius: 5px;
 }
+=======
+#completeButton {
+  width: 100px;
+}
+
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body > nav {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+body > #content {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+body > footer {
+  flex-shrink: 0;
+}
+>>>>>>> 1b47b92c363abb8476867a6ce44d1b69bccd924f

@@ -1,3 +1,10 @@
 {{#each goals}}
-<p>{{goal}}</p>
+<p value={{id}}>{{goal}}{{#if completed}}<button
+                class="purple white-text waves-effect waves-light btn-small right disabled" id="completeButton"><i
+                        class="material-icons">beenhere</i></button>
+        {{else}}
+        <button class="purple white-text waves-effect waves-light btn-small right" id="completeButton">Complete</button>
+        {{/if}}
+<div class="clearfix"></div>
+</p>
 {{/each}}

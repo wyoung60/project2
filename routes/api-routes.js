@@ -1,6 +1,7 @@
 const db = require("../models");
 const passport = require("../config/passport");
 const isAuthenticated = require("../config/middleware/isAuthenticated");
+const passwordStrength = require("check-password-strength");
 
 //Routes
 module.exports = (app) => {
@@ -56,8 +57,18 @@ module.exports = (app) => {
     res.render("login");
   });
 
-  app.post("/login", passport.authenticate("local"), (req, res) => {
-    res.redirect("/home");
+  app.post("/login", (req, res, next) => {
+    passport.authenticate("local", (err, user, info) => {
+      if (!user) res.render("login", { error: info.message });
+      else {
+        req.logIn(user, (err) => {
+          if (err) {
+            return next(err);
+          }
+          return res.redirect("/home");
+        });
+      }
+    })(req, res, next);
   });
 
   app.get("/signup", (req, res) => {
@@ -99,6 +110,17 @@ module.exports = (app) => {
     });
   });
 
+  app.post("/api/update", (req, res) => {
+    db.Goals.update(
+      {
+        completed: true,
+      },
+      { where: { id: req.body.id } }
+    ).then(() => {
+      res.end();
+    });
+  });
+
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
     req.session.email = req.user.email;
     res.json(req.user);
@@ -117,6 +139,18 @@ module.exports = (app) => {
       });
   });
 
+  app.post("/api/checkpassword", (req, res) => {
+    if (req.body.password === "") {
+      res.json({
+        strength: "Weak",
+      });
+    } else {
+      res.json({
+        strength: passwordStrength(req.body.password).value,
+      });
+    }
+  });
+
   // logout route
   app.get("/logout", function (req, res) {
     req.logout();
@@ -133,5 +167,17 @@ module.exports = (app) => {
         id: req.user.id,
       });
     }
+  });
+
+  app.delete("/api/delete", isAuthenticated, (req, res) => {
+    db.Goals.destroy({
+      where: { ResolutionId: req.body.id },
+    }).then(() => {
+      db.Resolution.destroy({
+        where: { id: req.body.id },
+      }).then(() => {
+        res.redirect("/view");
+      });
+    });
   });
 };
