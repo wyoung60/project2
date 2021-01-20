@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Sign Up</title>
+    <title>Quiet Sands</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -12,12 +12,13 @@
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Fahkwang:wght@200&display=swap" rel="stylesheet" />
 </head>
 
 <body>
     <nav>
         <div class="nav-wrapper s12 m6 orange darken-2">
-            <a href="#" class="brand-logo center purple-text text-darken-4">Logo</a>
+            <a href="#" class="brand-logo center purple-text text-darken-4">Quiet Sands</a>
             <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="left hide-on-med-and-down">
                 <li>
@@ -64,23 +65,33 @@
                 All</a>
         </li>
     </ul>
-    <div id= "content">{{{body}}}</div>
+    <div id="content">{{{body}}}</div>
     <footer class="page-footer orange darken-2">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="white-text">Footer Content</h5>
-                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer
-                        content.
-                    </p>
+                    <h5 class="brand-logo purple-text text-darken-2">Quiet Sands</h5>
+                    <p class="purple-text text-darken-2"></p>
                 </div>
                 <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Links</h5>
                     <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">About</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Contact</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Terms of Use</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Sign Up</a></li>
+                        <li>
+                            {{#if user}}
+                            <a class="purple-text darken-2" href="/Home">Home</a>
+                            {{else}}
+                            <a class="purple-text darken-2" href="/">Home</a>
+                            {{/if}}
+                        </li>
+                        {{#if user}}
+                        <a class="purple-text darken-2" href="/logout">Logout</a>
+                        {{else}}
+                        <a class="purple-text darken-2" href="/login">Login/Sign Up</a>
+                        {{/if}}
+                        </li>
+                        <li>
+                            <a class="purple-text darken-2" href="/view">View
+                                All</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -88,6 +99,7 @@
         <div class="footer-copyright">
             <div class="container">
                 © 2020 Copyright Team Caboose
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
             </div>
         </div>
     </footer>
@@ -96,44 +108,3 @@
 </body>
 
 </html>
-
-{{!--
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
-    <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <script src="/assets/js/resolutions.js"></script>
-</head>
-
-<body>
-    <nav>
-        <div class="nav-wrapper s12 m6 orange darken-2">
-            {{#if user}}
-            <a href="/home" class="brand-logo center purple-text text-darken-4">Logo</a>
-            {{else}}
-            <a href="/" class="brand-logo center purple-text text-darken-4">Logo</a>
-            {{/if}}
-            <ul id="nav-mobile" class="rightoch hide-on-med-and-down">
-                <li>
-                    <a class="btn waves-effect waves-light orange darken-4 purple-text darken-2" href="/view">About</a>
-                </li>
-                {{#if user}}
-                <li><a class="btn waves-effect waves-light orange darken-4 purple-text darken-2"
-                        href="/logout">Logout</a></li>
-                {{else}}
-                <li><a class="btn waves-effect waves-light orange darken-4 purple-text darken-2"
-                        href="/login">Login/Sign Up</a></li>
-                {{/if}}
-                <li>
-                    <a class="btn waves-effect waves-light orange darken-4 purple-text darken-2"
-                        href="/contact">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </nav> --}}

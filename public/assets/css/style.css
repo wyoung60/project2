@@ -1,7 +1,41 @@
+body {
+  background-color: 494947;
+}
+
+h1 {
+  font-family: "Fahkwang", sans-serif;
+}
+
+h2 {
+  font-family: "Fahkwang", sans-serif;
+}
+
+.collection-item {
+  font-family: "Fahkwang", sans-serif;
+}
+
+.brand-logo {
+  font-family: "Fahkwang", sans-serif;
+}
+
+.card {
+  border-radius: 10px;
+}
+
+.card-title {
+  font-family: "Fahkwang", sans-serif;
+}
+
+.card-content {
+  font-family: "Fahkwang", sans-serif;
+}
+
+.btn {
+  border-radius: 5px;
+}
 #completeButton {
   width: 100px;
 }
-
 
 body {
   display: flex;
