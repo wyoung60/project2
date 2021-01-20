@@ -1,6 +1,7 @@
 const db = require("../models");
 const passport = require("../config/passport");
 const isAuthenticated = require("../config/middleware/isAuthenticated");
+const passwordStrength = require("check-password-strength");
 
 //Routes
 module.exports = (app) => {
@@ -136,6 +137,18 @@ module.exports = (app) => {
       .catch((err) => {
         res.status(401).json(err);
       });
+  });
+
+  app.post("/api/checkpassword", (req, res) => {
+    if (req.body.password === "") {
+      res.json({
+        strength: "Weak",
+      });
+    } else {
+      res.json({
+        strength: passwordStrength(req.body.password).value,
+      });
+    }
   });
 
   // logout route
