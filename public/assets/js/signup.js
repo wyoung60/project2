@@ -1,41 +1,23 @@
-// Decided to not do it this way. It's simpler to use forms without JS
-const signUpForm = document.querySelector("#signup");
-const emailInput = document.querySelector("#email-input");
-const passwordInput = document.querySelector("#password-input");
+const passwordInput = document.getElementById("password")
+const passwordStrength = document.getElementById("password-strength")
 
-signUpForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  let userData = {
-    email: emailInput.value.trim(),
-    password: passwordInput.value.trim(),
-  };
+passwordInput.addEventListener("input", (event) => {
 
-  if (!userData.email || !userData.password) {
-    return;
-  }
+  fetch("/api/checkpassword", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    password: event.target.value,
+  }),
+}).then((response) => {
+  return response.json();
+})
+.then((data) => {
+  passwordStrength.textContent = data.strength
+})
 
-  signUpUser(userData.email, userData.password);
-  emailInput.value = "";
-  passwordInput.value = "";
-});
+})
 
-const signUpUser = (email, password) => {
-  fetch("/api/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
-  })
-    .then(() => {
-      window.location.replace("/members");
-    })
-    .catch(loginErr);
-};
 
-const loginErr = (err) => {
-  document.querySelector("#alert .msg").textContent(err.responseJSON);
-};
