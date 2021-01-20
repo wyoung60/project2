@@ -10,6 +10,7 @@ const app = express();
 //Create PORT
 const PORT = process.env.PORT || 8080;
 
+//Make public folder the static folder
 app.use(express.static("public"));
 
 app.use(express.urlencoded({ extended: true }));

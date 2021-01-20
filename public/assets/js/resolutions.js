@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     console.info("DOM loaded");
   }
 
+  //JS for mobile nav side bar
   var elems = document.querySelectorAll(".sidenav");
   M.Sidenav.init(elems);
   //Traversing the DOM variables
@@ -15,19 +16,27 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const goalsDiv = document.querySelectorAll("#goalsDiv");
   const deleteButton = document.querySelectorAll("#deleteButton");
   const completeButton = document.querySelectorAll("#completeButton");
+  //Creating dynamic elements
   const milestones = document.createElement("button");
   const milestoneInput = document.createElement("input");
   const milestoneInputLabel = document.createElement("label");
   const milestoneDiv = document.createElement("div");
+  //Creating object for new goal
   const newGoal = { goal: "", resolution: "" };
 
+  //If statement to prevent code from running until element is present
   if (selectedResolution) {
+    //Loop to go through all elements in querySelectorAll
     selectedResolution.forEach((item) => {
+      //Click event
       item.addEventListener("click", () => {
+        //Clears value in input
         milestoneInput.value = "";
+        //Resets the display value
         goalsDiv.forEach((item) => {
           item.style.display = "none";
         });
+        //Sets attributes and text content for elements
         milestoneDiv.setAttribute("class", "input-field col s12");
         milestoneInput.setAttribute("type", "text");
         milestoneInput.setAttribute("id", "milestone");
@@ -40,9 +49,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
           "class",
           "purple white-text waves-effect waves-light btn-flat"
         );
+        //Adds resolutionID value to new goal object
         newGoal.resolution = item.getAttribute("value");
+        //Selects element attached to clicked element
         const goalDiv = item.nextElementSibling;
+        //Makes it visible
         goalDiv.style.display = "block";
+        //Appends all necessary elements
         goalDiv.appendChild(milestoneDiv);
         milestoneDiv.appendChild(milestoneInput);
         milestoneInput.insertAdjacentElement("afterend", milestoneInputLabel);
@@ -51,10 +64,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
   }
 
+  //If statement to prevent code from running until element is present
   if (completeButton) {
     completeButton.forEach((button) => {
       button.addEventListener("click", () => {
+        //Gets goal table id
         const goalValue = button.parentElement.getAttribute("value");
+        //Fetch to api to update goal table boolean value for selected element
         fetch("/api/update", {
           method: "POST",
           headers: {
@@ -63,12 +79,15 @@ document.addEventListener("DOMContentLoaded", (e) => {
           },
           body: JSON.stringify({ id: goalValue }),
         }).then((response) => {});
+        //Disables button
         button.setAttribute(
           "class",
           "purple white-text waves-effect waves-light btn-small right disabled"
         );
+        //Sets id and empties text content of button
         button.setAttribute("id", "completeButton");
         button.textContent = "";
+        //Adds complete element
         const starElement = document.createElement("i");
         starElement.textContent = "beenhere";
         starElement.setAttribute("class", "material-icons");
@@ -77,12 +96,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
   }
 
+  //If statement to prevent code from running until element is present
   if (milestones) {
     milestones.addEventListener("click", () => {
+      //If no text present kicks out of click event function
       if (!milestoneInput.value) {
         return;
       }
+      //Add text content of input to new goal object
       newGoal.goal = milestoneInput.value;
+      //Fetch to post new goal to goals table
       fetch("/api/goal", {
         method: "POST",
         headers: {
@@ -106,9 +129,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
       }
       //Gets data from text area
       let resolutionValue = { title: resolutionTextArea.value };
-
+      //Gets value added to page of mind, body, or knowledge
       resolutionCategory = document.querySelector("#resolutionCategory");
-
+      //Switch statement to add boolean values in resolutions table
       switch (resolutionCategory.getAttribute("value")) {
         case "mind":
           resolutionValue.mind = true;
@@ -141,10 +164,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
   }
 
+  //If statement to prevent code from running until element is present
   if (deleteButton) {
     deleteButton.forEach((button) => {
       button.addEventListener("click", () => {
+        //Get resolution id
         const resolutionId = button.parentElement.getAttribute("value");
+        //Fetch to delete item from table
         fetch("/api/delete", {
           method: "DELETE",
           headers: {
