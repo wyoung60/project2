@@ -22,6 +22,7 @@
             <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="left hide-on-med-and-down">
                 <li>
+                    {{!-- If statements to direct to correct if user is logged in --}}
                     {{#if user}}
                     <a class="btn waves-effect waves-light orange darken-4 purple-text darken-2" href="/Home">Home</a>
                     {{else}}
@@ -29,6 +30,7 @@
                     {{/if}}
                 </li>
                 <li>
+                    {{!-- If statements to display correct values if user is logged in --}}
                     {{#if user}}
                     <a class="btn waves-effect waves-light orange darken-4 purple-text darken-2"
                         href="/logout">Logout</a>
@@ -47,6 +49,7 @@
 
     <ul class="sidenav" id="mobile">
         <li>
+            {{!-- If statements to direct to correct page if user is logged in --}}
             {{#if user}}
             <a class="btn waves-effect waves-light orange darken-4 purple-text darken-2" href="/Home">Home</a>
             {{else}}
@@ -54,6 +57,7 @@
             {{/if}}
         </li>
         <li>
+            {{!-- If statements to display correct values if user is logged in --}}
             {{#if user}}
             <a class="btn waves-effect waves-light orange darken-4 purple-text darken-2" href="/logout">Logout</a>
             {{else}}
@@ -76,17 +80,19 @@
                 <div class="col l4 offset-l2 s12">
                     <ul>
                         <li>
+                            {{!-- Same if statements as above --}}
                             {{#if user}}
                             <a class="purple-text darken-2" href="/Home">Home</a>
                             {{else}}
                             <a class="purple-text darken-2" href="/">Home</a>
                             {{/if}}
                         </li>
-                        {{#if user}}
-                        <a class="purple-text darken-2" href="/logout">Logout</a>
-                        {{else}}
-                        <a class="purple-text darken-2" href="/login">Login/Sign Up</a>
-                        {{/if}}
+                        <li>
+                            {{#if user}}
+                            <a class="purple-text darken-2" href="/logout">Logout</a>
+                            {{else}}
+                            <a class="purple-text darken-2" href="/login">Login/Sign Up</a>
+                            {{/if}}
                         </li>
                         <li>
                             <a class="purple-text darken-2" href="/view">View
