@@ -19,7 +19,7 @@ h2 {
 }
 
 .card {
-  border-radius: 10px;
+  border-radius: 50px;
 }
 
 .card-title {
@@ -55,4 +55,20 @@ body > #content {
 
 body > footer {
   flex-shrink: 0;
+}
+
+#resolutionCategory {
+  text-align: center;
+}
+
+#selectedResolution {
+  background-color:rgba(3, 180, 171, 0.781);
+}
+
+.view-header {
+  font-family: "Fahkwang", sans-serif;
+}
+
+.foot {
+  font-family: "Fahkwang", sans-serif;
 }
