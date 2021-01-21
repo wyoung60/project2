@@ -16,7 +16,7 @@ Get a leg up on your New Years resolutions. Keep track of mind, body and knowled
 Install necessary dependencies with npm i command.
 
 ## Usage
-Command line application requiring npm packages mysql2, passport, check-password-strength, passport-local, sequelize, path, bcryptjs, express, express-handlebars and express-session.
+Application requiring npm packages mysql2, passport, check-password-strength, passport-local, sequelize, path, bcryptjs, express, express-handlebars and express-session.
 
 ## Screenshot
 ![screenshot](public/assets/image/preview.png)
