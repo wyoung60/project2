@@ -28,7 +28,7 @@ Seth Klusmire, Zack Noe and Wesley Young
 MIT
 
 ## Links
-https://github.com/wyoung60/project2
+https://github.com/wyoung60/project2 </br>
 https://quiet-sands-70711.herokuapp.com/
 
 ## Questions
